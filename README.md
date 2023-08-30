@@ -3,7 +3,7 @@
 
 How To Runbot.io: The Trading Strategy (Step 1 of Create Your Own Free Trading Bot With Zero Coding)
 -------------
-The strategy file: Orderflow & Funding Rates (BTC).strategy
+The strategy file: Orderflow_Funding_Rates_BTC.strategy
 
 https://youtu.be/3Cpgkxy5IA0
 
