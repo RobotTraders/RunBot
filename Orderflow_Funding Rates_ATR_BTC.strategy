@@ -1,0 +1,346 @@
+{
+  "name": "Orderflow & Funding Rates & ATR (BTC)",
+  "notes": "45 578",
+  "params": {
+    "indicators": [
+      {
+        "name": "Funding",
+        "configs": {
+          "period": 1,
+          "market": "Bybit:BTCUSDT"
+        },
+        "triggers": [
+          {
+            "signal": "long",
+            "name": "inZone",
+            "selectorId": 0,
+            "configs": {
+              "level": [
+                -0.05,
+                0.0099
+              ]
+            },
+            "duration": []
+          },
+          {
+            "signal": "short",
+            "name": "inZone",
+            "selectorId": 0,
+            "configs": {
+              "level": [
+                -0.0099,
+                0.05
+              ]
+            },
+            "duration": []
+          }
+        ]
+      },
+      {
+        "name": "Orderflow",
+        "configs": {
+          "period": 1,
+          "timeframe": 3600,
+          "market": "Bybit:BTCUSDT"
+        },
+        "triggers": [
+          {
+            "signal": "long",
+            "name": "crossLevel",
+            "selectorId": 0,
+            "configs": {
+              "level": 75,
+              "isBuy": true,
+              "isUp": true
+            },
+            "duration": []
+          },
+          {
+            "signal": "short",
+            "name": "crossLevel",
+            "selectorId": 0,
+            "configs": {
+              "level": 75,
+              "isBuy": false,
+              "isUp": true
+            },
+            "duration": []
+          }
+        ]
+      },
+      {
+        "name": "Orderflow",
+        "configs": {
+          "period": 1,
+          "timeframe": 3600,
+          "market": "Binance:BTCUSDT"
+        },
+        "triggers": [
+          {
+            "signal": "long",
+            "name": "crossLevel",
+            "selectorId": 0,
+            "configs": {
+              "level": 59,
+              "isBuy": true,
+              "isUp": true
+            },
+            "duration": []
+          },
+          {
+            "signal": "short",
+            "name": "crossLevel",
+            "selectorId": 0,
+            "configs": {
+              "level": 60,
+              "isBuy": false,
+              "isUp": true
+            },
+            "duration": []
+          }
+        ]
+      },
+      {
+        "name": "Orderflow",
+        "configs": {
+          "period": 1,
+          "timeframe": 3600,
+          "market": "OKX:BTC-USDT-SWAP"
+        },
+        "triggers": [
+          {
+            "signal": "long",
+            "name": "crossLevel",
+            "selectorId": 0,
+            "configs": {
+              "level": 58,
+              "isBuy": true,
+              "isUp": true
+            },
+            "duration": []
+          }
+        ]
+      },
+      {
+        "name": "Orderflow",
+        "configs": {
+          "period": 1,
+          "timeframe": 14400,
+          "market": "OKX:BTC-USDT-SWAP"
+        },
+        "triggers": [
+          {
+            "signal": "long",
+            "name": "crossLevel",
+            "selectorId": 0,
+            "configs": {
+              "level": 57,
+              "isBuy": true,
+              "isUp": true
+            },
+            "duration": []
+          },
+          {
+            "signal": "short",
+            "name": "crossLevel",
+            "selectorId": 0,
+            "configs": {
+              "level": 57,
+              "isBuy": false,
+              "isUp": true
+            },
+            "duration": []
+          }
+        ]
+      },
+      {
+        "name": "Atr",
+        "configs": {
+          "timeframe": 3600,
+          "period": 3,
+          "market": "Bybit:BTCUSDT"
+        },
+        "triggers": [
+          {
+            "signal": "cancel",
+            "name": "inZone",
+            "selectorId": 0,
+            "configs": {
+              "level": [
+                0,
+                0.3
+              ]
+            },
+            "duration": []
+          }
+        ]
+      }
+    ],
+    "triggersIn": [
+      {
+        "name": "majority",
+        "selectorId": 0,
+        "configs": {
+          "majorityType": "Majority"
+        }
+      },
+      {
+        "name": "customSignals",
+        "selectorId": 0,
+        "configs": {
+          "nbSignals": 2,
+          "signalType": "long",
+          "isMax": false
+        }
+      },
+      {
+        "name": "customSignals",
+        "selectorId": 0,
+        "configs": {
+          "nbSignals": 2,
+          "signalType": "short",
+          "isMax": false
+        }
+      },
+      {
+        "name": "customSignals",
+        "selectorId": 0,
+        "configs": {
+          "nbSignals": 0,
+          "signalType": "cancel",
+          "isMax": true
+        }
+      }
+    ],
+    "triggersOut": [
+      {
+        "name": "oppositeTrade",
+        "selectorId": 0,
+        "params": {
+          "percentSize": 100
+        },
+        "configs": {}
+      },
+      {
+        "name": "stopLossPercent",
+        "selectorId": 0,
+        "params": {
+          "percentSize": 100
+        },
+        "configs": {
+          "stopLossPercent": 8
+        }
+      },
+      {
+        "name": "marketTpAtr",
+        "selectorId": 0,
+        "params": {
+          "percentSize": 100
+        },
+        "configs": {
+          "atr": {
+            "timeframe": 14400,
+            "period": 3
+          },
+          "nbAtr": 30
+        }
+      }
+    ],
+    "triggersMid": [],
+    "tradeSizes": [
+      {
+        "name": "leverage",
+        "selectorId": 0,
+        "configs": {
+          "leverage": 3
+        }
+      },
+      {
+        "name": "riskRewardPercent",
+        "selectorId": 0,
+        "configs": {
+          "percentCapital": 2.5,
+          "percentStop": 8
+        }
+      }
+    ],
+    "tradeMethods": [
+      {
+        "name": "market",
+        "selectorId": 0,
+        "configs": {}
+      }
+    ],
+    "signals": [
+      "long",
+      "short",
+      "stop",
+      "cancel"
+    ],
+    "selectors": [
+      {
+        "name": "onoff",
+        "params": {
+          "color": "#c0c1cb",
+          "isIcon": true,
+          "title": "fa-check"
+        },
+        "configs": {
+          "isOn": true
+        }
+      },
+      {
+        "name": "onoff",
+        "params": {
+          "color": "#a75151",
+          "isIcon": true,
+          "title": "fa-times"
+        },
+        "configs": {
+          "isOn": false
+        }
+      },
+      {
+        "name": "trade",
+        "params": {
+          "color": "#45becb",
+          "isIcon": false,
+          "title": "L"
+        },
+        "configs": {
+          "isLong": true
+        }
+      },
+      {
+        "name": "trade",
+        "params": {
+          "color": "#b58c3e",
+          "isIcon": false,
+          "title": "S"
+        },
+        "configs": {
+          "isLong": false
+        }
+      }
+    ]
+  },
+  "backtestInputDatas": {
+    "backtestRange": [
+      1633305600,
+      1696291200
+    ],
+    "nftCompatible": false,
+    "webhookJsonCompatible": true,
+    "webhookDiscordCompatible": true,
+    "webhookMizarCompatible": true,
+    "webhookKryllCompatible": true,
+    "webhookTealstreetCompatible": true,
+    "webhookWundertradingCompatible": false,
+    "webhookWundertradingPremiumCompatible": true,
+    "takerFeesPercent": 0.06,
+    "makerFeesPercent": 0.02,
+    "initialCapital": 10000,
+    "market": "Bybit:BTCUSDT"
+  },
+  "version": "1.1.7"
+}
